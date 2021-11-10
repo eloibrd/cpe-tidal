@@ -39,7 +39,16 @@ if (array_key_exists(1, $request)) {
             }
             http_response_code(400);
             exit();
-
+        case 'keywords':
+            // routes : /keywords/all
+            if (array_key_exists(1, $request) && $request[1] == 'all') {
+                $data = $dbd->getAllKeywords();
+                header('Content-Type: application/json');
+                echo json_encode($data);
+                break;
+            }
+            http_response_code(400);
+            exit();
         case 'pathologies':
             // routes : /pathologies/all
             //          /pathologies/byKeyword/:keyword

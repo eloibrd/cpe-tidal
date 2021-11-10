@@ -94,6 +94,18 @@
             return $meridiens;
         }
 
+        public function getAllKeywords(){
+            $requete = "SELECT * FROM keywords ";
+            $resultats = $this->conn->prepare($requete);
+            $resultats->execute();
+            $lines = $resultats->fetchAll(PDO::FETCH_ASSOC);
+            $keywords = [];
+            foreach($lines as $line){
+                array_push($keywords, $line["name"]);
+            }
+            return $keywords;
+        }
+
         public function getPathosByKeyWord(String $keyword){
             $requete = "SELECT * FROM keywords 
             INNER JOIN keysympt ON (keywords.idk = keysympt.idk) 

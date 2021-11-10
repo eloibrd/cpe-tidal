@@ -37,6 +37,7 @@
                     <form class="search_container" action="Auth/login.php" method="post">
                         <input class="form_input" type="text" placeholder="Mot clé">
                     </form>
+                    <div id="result"></div>
                 </section>';
         ?>
         <section class="pathologies_container">
@@ -65,5 +66,5 @@
 
     </section>
 </body>
-<script src="../JS/main.js"></script>
+<script type="module" src="../JS/main.js"></script>
 </html>

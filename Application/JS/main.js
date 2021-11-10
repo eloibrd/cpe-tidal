@@ -1,3 +1,5 @@
+import apiRequest from "./api_request.js";
+
 function includeComponent() {
     // Trouver le "head" pour y insérer les link css
     let head = document.querySelector("head");
@@ -52,11 +54,40 @@ async function loadPatho() {
     // Trouver le conteneur des pathologies pour y insérer les pathologies
     let pathologiesContainer = document.querySelector(".pathologies_container");
     // console.log(pathologiesContainer);
-    let url = "http://192.168.25.20/API/api.php/meridiens/all";
-    let response = await fetch(url, {
-        method: 'GET'
-    });
-    let result = await response.json();
-    console.log(result);
+    let url = apiRequest.baseApiUrl + "/meridiens/all";
+    let response = await apiRequest.sendRequest(url);
+    console.log(response);
 };
-loadPatho()
+// loadPatho()
+
+
+// autocomplete keywords
+async function loadKeywords() {
+    let url = apiRequest.baseApiUrl + "/keywords/all";
+    let response = await apiRequest.sendRequest(url);
+    return response;
+};
+var keywords = loadKeywords();
+
+function autocompleteMatch(input) {
+    if (input == '') {
+      return [];
+    }
+    var reg = new RegExp(input)
+    return keywords.filter(function(term) {
+        if (term.match(reg)) {
+          return term;
+        }
+    });
+  }
+   
+  function showResults(val) {
+    res = document.getElementById("result");
+    res.innerHTML = '';
+    let list = '';
+    let terms = autocompleteMatch(val);
+    for (i=0; i<terms.length; i++) {
+      list += '<li>' + terms[i] + '</li>';
+    }
+    res.innerHTML = '<ul>' + list + '</ul>';
+  }
