@@ -1,0 +1,25 @@
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: grid;
+    grid-template: auto / auto auto;
+    gap: 25px;
+    justify-content: space-between;
+    padding: 25px;
+    box-sizing: border-box;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.5%);
+    .main_title {
+        margin: 0;
+        font-size: 42px;
+        color: var(--secondary-color);
+        font-family: "Raleway";
+    }
+    nav {
+        display: grid;
+        grid-template: auto / repeat(var(--nav-number), auto);
+        gap: 25px;
+    }
+    z-index: 5;
+}

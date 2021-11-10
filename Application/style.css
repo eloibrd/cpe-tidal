@@ -1,0 +1,224 @@
+:root {
+  --nav-number: 2;
+  --primary-color: #FF7E68;
+  --secondary-color: #006A70;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+}
+
+.sign_form_container::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-image: url(alternative_medicine.jpg);
+  -webkit-filter: blur(2.5px) brightness(50%);
+          filter: blur(2.5px) brightness(50%);
+  background-size: cover;
+  z-index: -1;
+}
+
+.sign_form_container {
+  position: relative;
+  place-items: center;
+  display: -ms-grid;
+  display: grid;
+  height: calc(100vh - 98px);
+}
+
+.sign_form_container form {
+  max-width: 700px;
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.sign_form_container form h2 {
+  font-size: 42px;
+  color: white;
+  text-align: center;
+}
+
+.sign_form_container form .form_input {
+  padding: 10px;
+  border: #FFFFFF55 solid 2px;
+  border-radius: 7px;
+  color: white;
+}
+
+.sign_form_container form .form_input:focus {
+  border: var(--primary-color) solid 2px;
+}
+
+.sign_form_container form .form_input::-webkit-input-placeholder {
+  color: #FFFFFF55;
+}
+
+.sign_form_container form .form_input:-ms-input-placeholder {
+  color: #FFFFFF55;
+}
+
+.sign_form_container form .form_input::-ms-input-placeholder {
+  color: #FFFFFF55;
+}
+
+.sign_form_container form .form_input::placeholder {
+  color: #FFFFFF55;
+}
+
+.sign_form_container form label,
+.sign_form_container form .button,
+.sign_form_container form .form_input,
+.sign_form_container form h2 {
+  margin: 20px;
+  width: 100%;
+}
+
+.main h2 {
+  font-size: 42px;
+  text-align: center;
+  margin: 50px;
+}
+
+.main .search_form_container {
+  position: relative;
+  display: -ms-grid;
+  display: grid;
+  margin: 50px;
+}
+
+.main .search_form_container form {
+  display: -ms-grid;
+  display: grid;
+}
+
+.main .search_form_container form .form_input {
+  padding: 10px;
+  border: #00000055 solid 2px;
+  border-radius: 7px;
+}
+
+.main .search_form_container form .form_input:focus {
+  border: var(--primary-color) solid 2px;
+}
+
+.main .search_form_container form .form_input::-webkit-input-placeholder {
+  color: #00000055;
+}
+
+.main .search_form_container form .form_input:-ms-input-placeholder {
+  color: #00000055;
+}
+
+.main .search_form_container form .form_input::-ms-input-placeholder {
+  color: #00000055;
+}
+
+.main .search_form_container form .form_input::placeholder {
+  color: #00000055;
+}
+
+.main .pathologies_container {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  gap: 50px;
+  margin: 50px;
+}
+
+.main .pathologies_container .pathologie_card {
+  -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  margin: 25px 0;
+  padding: 25px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 15px;
+}
+
+.main .pathologies_container .pathologie_card .meridien {
+  color: #00000099;
+}
+
+.main .pathologies_container .pathologie_card .chevron {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  border-left: 1.5px solid #000;
+  border-bottom: 1.5px solid #000;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+  -webkit-transform-origin: 25% 75%;
+          transform-origin: 25% 75%;
+  -webkit-transition: ease-in-out .3s;
+  transition: ease-in-out .3s;
+}
+
+.main .pathologies_container .pathologie_card .down {
+  -webkit-transform: translate(100%, -20%) rotate(-45deg);
+          transform: translate(100%, -20%) rotate(-45deg);
+}
+
+.main .pathologies_container .pathologie_card .up {
+  -webkit-transform: translate(100%, -20%) rotate(135deg);
+          transform: translate(100%, -20%) rotate(135deg);
+}
+
+.main .pathologies_container .pathologie_card h3 {
+  margin-top: 0;
+}
+
+.main .pathologies_container .pathologie_card .symptomes_title {
+  margin-bottom: 0;
+}
+
+.main .pathologies_container .pathologie_card .sympthomes_container {
+  list-style: none;
+  margin-bottom: 0;
+  display: none;
+  -webkit-transition: all 3s;
+  transition: all 3s;
+}
+
+.main .pathologies_container .pathologie_card:hover {
+  -webkit-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.button {
+  padding: 15px;
+  background-color: var(--primary-color);
+  border-radius: 24px;
+  color: white;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.button:hover {
+  -webkit-box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.button:active {
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+          box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+/*# sourceMappingURL=style.css.map */
