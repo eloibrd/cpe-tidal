@@ -14,7 +14,7 @@ body {
   width: 100%;
   height: 100%;
   position: absolute;
-  background-image: url(alternative_medicine.jpg);
+  background-image: url(../assets/alternative_medicine.jpg);
   -webkit-filter: blur(2.5px) brightness(50%);
           filter: blur(2.5px) brightness(50%);
   background-size: cover;

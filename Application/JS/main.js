@@ -8,14 +8,14 @@ function includeComponent() {
         let componentName = component.getAttribute("name");
         if (componentName) {
             // Nom des fichiers à importer
-            fileHTML = componentName + "/" + componentName + ".html";
-            fileCss = componentName + "/" + componentName + ".css";
+            fileHTML = "../components/" + componentName + "/" + componentName + ".html";
+            fileCss = "../stylesheets/" +componentName + "/" + componentName + ".css";
             // Créer et insère le lien pour le fichier css
             let link = document.createElement('link');
             link.rel = 'stylesheet';
             link.type = 'text/css';
             link.href = fileCss;
-            head.appendChild(link)
+            head.appendChild(link);
                 // Fait une requete HTTP pour importer le fichier HTML
             xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function() {
@@ -41,9 +41,22 @@ function includeComponent() {
 includeComponent();
 
 function showSymptomes(chevron) {
-    chevron.classList.toggle('up')
-    chevron.classList.toggle('down')
-    sympthomesContainer = chevron.parentNode.parentNode.lastElementChild
-    if (chevron.classList.contains('up')) sympthomesContainer.style.display = "block"
-    else sympthomesContainer.style.display = "none"
+    chevron.classList.toggle('up');
+    chevron.classList.toggle('down');
+    sympthomesContainer = chevron.parentNode.parentNode.lastElementChild;
+    if (chevron.classList.contains('up')) sympthomesContainer.style.display = "block";
+    else sympthomesContainer.style.display = "none";
 }
+
+async function loadPatho() {
+    // Trouver le conteneur des pathologies pour y insérer les pathologies
+    let pathologiesContainer = document.querySelector(".pathologies_container");
+    // console.log(pathologiesContainer);
+    let url = "http://192.168.25.20/API/api.php/meridiens/all";
+    let response = await fetch(url, {
+        method: 'GET'
+    });
+    let result = await response.json();
+    console.log(result);
+};
+loadPatho()

@@ -20,7 +20,7 @@ if (isset($_POST['reg_user'])) {
             // error_log($errors);
             return $errors;
         }else{
-            header('Location: ../Application/connexion.html');
+            header('Location: ../Application/pages/connexion.html');
             return "User sucessfully registered , please log in";
         }
     }

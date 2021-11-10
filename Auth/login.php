@@ -12,20 +12,20 @@ if (isset($_POST['log_user'])) {
         array_push($errors, "Username not found");
         var_dump($errors);
         $_POST['errors'] = $errors;
-        header("Location: ../Application/connexion.html");
+        header("Location: ../Application/pages/connexion.html");
         exit();
     }else{
         if(password_verify($password, $db_pass[0]['password'])){
             $_SESSION['username'] = $username;
   	        $_SESSION['success'] = "You are now logged in";
-            header("Location: ../Application/home.php");
+            header("Location: ../Application/pages/home.php");
             exit();
         }
         else{
             array_push($errors, "Wrong password");
             var_dump($errors);
             $_POST['errors'] = $errors;
-            header("Location: ../Application/connexion.html");
+            header("Location: ../Application/pages/connexion.html");
             exit();
         }
     }

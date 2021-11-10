@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acupuncture 300</title>
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../stylesheets/normalize.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
     <link href='https://fonts.googleapis.com/css?family=Sora' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 </head>
@@ -15,14 +15,16 @@
 <body>
     <component name="header"></component>
     <section class="sign_form_container">
-        <form action="../Auth/login.php" method="post">
-            <h2>Rebonjour</h2>
+        <form method="post" action="../../Auth/register.php">
+            <h2>Bienvenue</h2>
+            <input class="form_input" type="text" id="email" name="email" placeholder="E-mail">
             <input class="form_input" type="text" id="username" name="username" placeholder="Identifiant">
             <input class="form_input" type="password" id="password" name="password" placeholder="Mot de passe">
-            <input type="submit" name="log_user" value="Se connecter" class="button">
+            <input class="form_input" type="password" id="conf_password" name="conf_password" placeholder="Confirmez le mot de passe">
+            <input type="submit" value="S'inscrire" class="button" name="reg_user">
         </form>
     </section>
 </body>
-<script src="main.js"></script>
+<script src="../JS/main.js"></script>
 
 </html>
