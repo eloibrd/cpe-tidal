@@ -51,7 +51,6 @@ function showSymptomes(chevron) {
 async function loadPatho() {
     // Trouver le conteneur des pathologies pour y insérer les pathologies
     let pathologiesContainer = document.querySelector(".pathologies_container");
-    // console.log(pathologiesContainer);
     let url = baseApiUrl + "/pathologies/all";
     let response = await sendRequest(url);
     response.forEach(patho => {
@@ -89,7 +88,6 @@ async function loadPatho() {
         pathoCard.appendChild(pathoSymps)
 
         pathologiesContainer.appendChild(pathoCard)
-        console.log(pathoCard)
     });
 };
 loadPatho()
@@ -120,9 +118,8 @@ function showAutocomplete(val) {
     res.innerHTML = '';
     let list = '';
     autocompleteMatch(val).then((terms) => {
-        console.log(terms);
         for (i = 0; i < terms.length; i++) {
-            list += '<li class="autocompleteItem" id="' + terms[i] + '">' + terms[i] + '</li>';
+            list += '<li class="autocompleteItem" onclick="appendSearchAutocomplete(this.id)" id="' + terms[i] + '">' + terms[i] + '</li>';
         }
         res.innerHTML = '<ul>' + list + '</ul>';
     });
@@ -131,7 +128,6 @@ function showAutocomplete(val) {
 async function getPathoByKeywords() {
     var keyword = document.getElementById("keywordSearch").value;
     const data = await sendRequest(baseApiUrl + '/pathologies/byKeyword/' + keyword);  // fetch('http://localhost:80/API/api.php/pathologies/byKeyword/' + keyword)
-    console.log(baseApiUrl + '/pathologies/byKeyword/' + keyword);
     var patho_html = '';
     data.forEach(patho => {
         patho_html += `
@@ -141,8 +137,7 @@ async function getPathoByKeywords() {
                     <p class="symptomes_title">Symptômes<span class="chevron down" onclick="showSymptomes(this)"></span></p>
                     <ul class="sympthomes_container">
                     `
-        var i = 0
-        console.log(patho.symptomes);
+        var i = 0;
         patho.symptomes.forEach(sympt => {
             patho_html += `
                         <li>${sympt.desc}</li>
@@ -159,18 +154,17 @@ async function getPathoByKeywords() {
 }
 
 var keywordSearch = document.getElementById('keywordSearch');
-// keywordSearch.onkeydown = function (e) {
-//     if (e.keyCode == 13) {
-//         getPathoByKeywords()
-//     }
-// };
 
 keywordSearch.addEventListener("keyup", function (e) {
-    console.log(keywordSearch.value);
     showAutocomplete(keywordSearch.value);
     if (e.keyCode == 13) {
         getPathoByKeywords()
     }
 });
+
+function appendSearchAutocomplete(suggestion) {
+    var keywordSearch = document.getElementById('keywordSearch');
+    keywordSearch.value = suggestion;
+}
 
 
