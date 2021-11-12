@@ -40,6 +40,42 @@
                     <div id="result"></div>
                 </section>';
         ?>
+        <script>
+            function getPathoByKeywords() {
+                var keyword = document.getElementById("form_input").value ;
+                const response = await fetch('http://localhost:80/API/api.php/pathologies/byKeyword/'+keyword)
+                console.log('localhost:80/pathologies/byKeyword/'+keyword)
+                const data = await response.json()
+                data.forEach(patho => {
+                    var patho_html = `
+                    <div class="pathologie_card">
+                    <h3>${patho.desc}</h3>
+                    <p class="meridien">Méridien : ${patho.mer.nom}</p>
+                    <p class="symptomes_title">Symptômes<span class="chevron down" onclick="showSymptomes(this)"></span></p>
+                    <ul class="sympthomes_container">
+                    `
+                    var i =0 
+                    patho.symptomes.foreach(sympt => {
+                        patho_html+=`
+                        '<li>${sympt.desc}</li>'
+                        `
+                        if(i<patho.symptomes.length -1){
+                            patho_html+='<hr>'
+                        }
+                        i+=1
+                    })
+                    patho_html+=`</ul>
+                        </div>`    
+                })
+                document.getElementById("pathologies_container").innerHTML = patho_html
+            }
+            document.getElementById('form_input').onkeydown = function(e){
+                if(e.keyCode == 13){
+                    getPathoByKeywords()
+                }
+            };
+
+        </script>
         <section class="pathologies_container">
         <?php
             include '../../API/DatabaseDriver.php';
