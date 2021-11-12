@@ -12,7 +12,8 @@
     <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
 </head>
 
-<body><?php
+<body>
+    <?php
         session_start();
         // alert($_SESSION);
         // print_r($_SESSION);
@@ -34,13 +35,11 @@
             if($_SESSION)
             echo
                 '<section class="search_form_container">
-                    <form class="search_container" action="Auth/login.php" method="post">
-                        <input class="form_input" type="text" placeholder="Mot clé">
-                    </form>
-                    <div id="result"></div>
+                    <input id="keywordSearch" class="form_input" type="text" placeholder="Mot clé">
+                    <div id="autocompletion"></div>
                 </section>';
         ?>
-        <section class="pathologies_container">
+        <section id="pathologies_container" class="pathologies_container">
         <?php
             include '../../API/DatabaseDriver.php';
             $dbd = new DatabaseDriver;
@@ -66,5 +65,6 @@
 
     </section>
 </body>
-<script type="module" src="../JS/main.js"></script>
+<script src="../JS/api_request.js"></script>
+<script src="../JS/main.js"></script>
 </html>

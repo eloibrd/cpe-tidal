@@ -8,8 +8,3 @@ async function sendRequest(req) {
 }
 
 var baseApiUrl = 'http://192.168.25.20/API/api.php';
-
-export default {
-    sendRequest,
-    baseApiUrl,
-};
