@@ -8,8 +8,8 @@ function includeComponent() {
         let componentName = component.getAttribute("name");
         if (componentName) {
             // Nom des fichiers à importer
-            fileHTML = "../components/" + componentName + "/" + componentName + ".html";
-            fileCss = "../stylesheets/" + componentName + "/" + componentName + ".css";
+            let fileHTML = "../components/" + componentName + "/" + componentName + ".html";
+            let fileCss = "../stylesheets/" + componentName + "/" + componentName + ".css";
             // Créer et insère le lien pour le fichier css
             let link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -17,7 +17,7 @@ function includeComponent() {
             link.href = fileCss;
             head.appendChild(link);
             // Fait une requete HTTP pour importer le fichier HTML
-            xhttp = new XMLHttpRequest();
+            let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     if (this.status == 200) {
@@ -52,12 +52,47 @@ async function loadPatho() {
     // Trouver le conteneur des pathologies pour y insérer les pathologies
     let pathologiesContainer = document.querySelector(".pathologies_container");
     // console.log(pathologiesContainer);
-    let url = baseApiUrl + "/meridiens/all";
+    let url = baseApiUrl + "/pathologies/all";
     let response = await sendRequest(url);
-    console.log(response);
-};
-// loadPatho()
+    response.forEach(patho => {
+        let pathoCard = document.createElement('div')
+        pathoCard.className = 'pathologie_card'
+        // Titre
+        let pathoTitle = document.createElement('h3')
+        pathoTitle.innerText = patho.desc
+        pathoCard.appendChild(pathoTitle)
+        // Méridien
+        let pathoMer = document.createElement('p')
+        pathoMer.className = 'meridien'
+        pathoMer.innerText = 'Méridien : ' + patho.mer.nom
+        pathoCard.appendChild(pathoMer)
 
+        // Titre "symptôme"avec le chevron
+        let pathoSympTitle = document.createElement('p')
+        pathoSympTitle.className = 'symptomes_title'
+        pathoSympTitle.innerText = 'Symptômes'
+        let pathoSympChevron = document.createElement('span')
+        pathoSympChevron.className = 'chevron down'
+        pathoSympChevron.addEventListener('click', (e) => showSymptomes(e.target))
+        pathoSympTitle.appendChild(pathoSympChevron)
+        pathoCard.appendChild(pathoSympTitle)
+
+        // Symptômes
+        let pathoSymps = document.createElement('ul')
+        pathoSymps.className = 'sympthomes_container'
+        patho.symptomes.forEach((symp, index) => {
+            let li = document.createElement('li')
+            li.innerText = symp.desc
+            pathoSymps.appendChild(li)
+            if (index < patho.symptomes.length - 1) pathoSymps.appendChild(document.createElement('hr'))
+        });
+        pathoCard.appendChild(pathoSymps)
+
+        pathologiesContainer.appendChild(pathoCard)
+        console.log(pathoCard)
+    });
+};
+loadPatho()
 
 // autocomplete keywords
 async function loadKeywords() {
