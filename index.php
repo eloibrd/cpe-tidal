@@ -1,3 +1,3 @@
 <?php 
-header("location:Application/home.php");
+header("location:Application/pages/home.php");
 ?>

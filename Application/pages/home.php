@@ -19,7 +19,7 @@
     ?>
     <?php 
     if($_SESSION){
-        echo include('../components/header/header_connected.php');
+        include('../components/header/header_connected.php');
     }
     else{
         echo '<component name="header"></component>';
@@ -66,5 +66,6 @@
 
     </section>
 </body>
-<script type="module" src="../JS/main.js"></script>
+<script src="../JS/api_request.js"></script>
+<script src="../JS/main.js"></script>
 </html>

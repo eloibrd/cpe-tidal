@@ -10,17 +10,17 @@ function includeComponent() {
         let componentName = component.getAttribute("name");
         if (componentName) {
             // Nom des fichiers à importer
-            fileHTML = "../components/" + componentName + "/" + componentName + ".html";
-            fileCss = "../stylesheets/" +componentName + "/" + componentName + ".css";
+            let fileHTML = "../components/" + componentName + "/" + componentName + ".html";
+            let fileCss = "../stylesheets/" + componentName + "/" + componentName + ".css";
             // Créer et insère le lien pour le fichier css
             let link = document.createElement('link');
             link.rel = 'stylesheet';
             link.type = 'text/css';
             link.href = fileCss;
             head.appendChild(link);
-                // Fait une requete HTTP pour importer le fichier HTML
-            xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function() {
+            // Fait une requete HTTP pour importer le fichier HTML
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
                 if (this.readyState == 4) {
                     if (this.status == 200) {
                         component.innerHTML = this.responseText;
@@ -54,40 +54,52 @@ async function loadPatho() {
     // Trouver le conteneur des pathologies pour y insérer les pathologies
     let pathologiesContainer = document.querySelector(".pathologies_container");
     // console.log(pathologiesContainer);
-    let url = apiRequest.baseApiUrl + "/meridiens/all";
-    let response = await apiRequest.sendRequest(url);
-    console.log(response);
-};
-// loadPatho()
+    let url = baseApiUrl + "/meridiens/all";
+    let response = await sendRequest(url);
+    response.forEach(patho => {
+        let pathoCard = document.createElement('div')
+        // Titre
+        let pathoTitle = document.createElement('h3')
+        pathoTitle.innerText = patho.nom
+        pathoCard.appendChild(pathoTitle)
+        // Métidien
+        let pathoMer = document.createElement('p')
+        pathoMer.classList.add('meridien')
+        pathoMer.innerText = 'Méridien : '
 
+        console.log(patho);
+        console.log(pathoCard);
+    });
+};
+loadPatho()
 
 // autocomplete keywords
 async function loadKeywords() {
-    let url = apiRequest.baseApiUrl + "/keywords/all";
-    let response = await apiRequest.sendRequest(url);
+    let url = baseApiUrl + "/keywords/all";
+    let response = await sendRequest(url);
     return response;
 };
 var keywords = loadKeywords();
 
 function autocompleteMatch(input) {
     if (input == '') {
-      return [];
+        return [];
     }
     var reg = new RegExp(input)
-    return keywords.filter(function(term) {
+    return keywords.filter(function (term) {
         if (term.match(reg)) {
-          return term;
+            return term;
         }
     });
-  }
-   
-  function showResults(val) {
+}
+
+function showResults(val) {
     res = document.getElementById("result");
     res.innerHTML = '';
     let list = '';
     let terms = autocompleteMatch(val);
-    for (i=0; i<terms.length; i++) {
-      list += '<li>' + terms[i] + '</li>';
+    for (i = 0; i < terms.length; i++) {
+        list += '<li>' + terms[i] + '</li>';
     }
     res.innerHTML = '<ul>' + list + '</ul>';
-  }
+}

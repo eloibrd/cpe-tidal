@@ -7,9 +7,7 @@ async function sendRequest(req) {
     return res;
 }
 
-var baseApiUrl = 'http://192.168.25.20/API/api.php';
+let curruntUrl = window.location.href.replace('Application/pages/home.php','')
+var baseApiUrl = curruntUrl + 'API/api.php';
 
-export default {
-    sendRequest,
-    baseApiUrl,
-};
+console.log(baseApiUrl)
