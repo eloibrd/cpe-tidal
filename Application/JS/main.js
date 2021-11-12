@@ -1,5 +1,3 @@
-import apiRequest from "./api_request.js";
-
 function includeComponent() {
     // Trouver le "head" pour y insérer les link css
     let head = document.querySelector("head");
@@ -54,21 +52,44 @@ async function loadPatho() {
     // Trouver le conteneur des pathologies pour y insérer les pathologies
     let pathologiesContainer = document.querySelector(".pathologies_container");
     // console.log(pathologiesContainer);
-    let url = baseApiUrl + "/meridiens/all";
+    let url = baseApiUrl + "/pathologies/all";
     let response = await sendRequest(url);
     response.forEach(patho => {
         let pathoCard = document.createElement('div')
+        pathoCard.className = 'pathologie_card'
         // Titre
         let pathoTitle = document.createElement('h3')
-        pathoTitle.innerText = patho.nom
+        pathoTitle.innerText = patho.desc
         pathoCard.appendChild(pathoTitle)
-        // Métidien
+        // Méridien
         let pathoMer = document.createElement('p')
-        pathoMer.classList.add('meridien')
-        pathoMer.innerText = 'Méridien : '
+        pathoMer.className = 'meridien'
+        pathoMer.innerText = 'Méridien : ' + patho.mer.nom
+        pathoCard.appendChild(pathoMer)
 
-        console.log(patho);
-        console.log(pathoCard);
+        // Titre "symptôme"avec le chevron
+        let pathoSympTitle = document.createElement('p')
+        pathoSympTitle.className ='symptomes_title'
+        pathoSympTitle.innerText = 'Symptômes'
+        let pathoSympChevron = document.createElement('span')
+        pathoSympChevron.className = 'chevron down'
+        pathoSympChevron.addEventListener('click', (e) => showSymptomes(e.target))
+        pathoSympTitle.appendChild(pathoSympChevron)
+        pathoCard.appendChild(pathoSympTitle)
+
+        // Symptômes
+        let pathoSymps = document.createElement('ul')
+        pathoSymps.className = 'sympthomes_container'
+        patho.symptomes.forEach((symp, index) => {
+            let li = document.createElement('li')
+            li.innerText = symp.desc
+            pathoSymps.appendChild(li)
+            if(index < patho.symptomes.length - 1) pathoSymps.appendChild(document.createElement('hr'))
+        });
+        pathoCard.appendChild(pathoSymps)
+
+        pathologiesContainer.appendChild(pathoCard)
+        console.log(pathoCard)
     });
 };
 loadPatho()
