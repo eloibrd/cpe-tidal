@@ -4,8 +4,8 @@
     include 'Models/Meridien.php';
 
     define('HOST', 'localhost');
-    define('USERNAME', 'loi');
-    define('PASSWORD', 'loi');
+    define('USERNAME', 'postgres');
+    define('PASSWORD', 'postgres');
     define('PORT', '5432');
     define('DBNAME', 'postgres');
 

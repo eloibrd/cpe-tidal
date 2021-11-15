@@ -78,10 +78,22 @@ body {
   width: 100%;
 }
 
+.sign_form_container form .autocompletion {
+  padding: 10px;
+  border: #FFFFFF55 solid 2px;
+  border-radius: 7px;
+  color: white;
+}
+
+.sign_form_container form .autocompletion li {
+  cursor: pointer;
+}
+
 .main h2 {
   font-size: 42px;
   text-align: center;
   margin: 50px;
+  margin-top: 0;
 }
 
 .main .search_form_container {
@@ -94,6 +106,7 @@ body {
 .main .search_form_container form {
   display: -ms-grid;
   display: grid;
+  gap: 10px;
 }
 
 .main .search_form_container form .form_input {
@@ -122,6 +135,33 @@ body {
   color: #00000055;
 }
 
+.main .search_form_container #autocompletion {
+  padding: 0;
+  margin: 0;
+  border-radius: 7px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  font-size: 14px;
+  display: none;
+  position: absolute;
+  z-index: 100;
+  bottom: 0px;
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
+  background-color: white;
+  width: calc(100% - 30px);
+}
+
+.main .search_form_container #autocompletion > li {
+  padding: 15px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.main .search_form_container #autocompletion > li:hover {
+  background-color: #006A7055;
+}
+
 .main .pathologies_container {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -133,6 +173,7 @@ body {
           justify-content: space-evenly;
   gap: 50px;
   margin: 50px;
+  margin-top: 0;
 }
 
 .main .pathologies_container .pathologie_card {
@@ -220,21 +261,5 @@ body {
 .button:active {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
           box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-.autocompletionItem:hover {
-  background-color: rgba(0, 81, 255, 0.4);
-}
-
-#autocompletion {
-  border: 2px solid black;
-}
-
-#autocompletion > li {
-  list-style: none;
-}
-
-.autocompletionItem:hover {
-  background-color: rgba(0, 81, 255, 0.4);
 }
 /*# sourceMappingURL=style.css.map */

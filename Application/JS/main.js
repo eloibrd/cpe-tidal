@@ -58,7 +58,7 @@ async function loadPatho() {
         pathoCard.className = 'pathologie_card'
         // Titre
         let pathoTitle = document.createElement('h3')
-        pathoTitle.innerText = patho.desc
+        pathoTitle.innerText = patho.desc.charAt(0).toUpperCase() + patho.desc.slice(1)
         pathoCard.appendChild(pathoTitle)
         // Méridien
         let pathoMer = document.createElement('p')
@@ -109,20 +109,28 @@ function autocompleteMatch(input) {
             if (term.match(reg)) {
                 return term;
             }
-        });
+        }).slice(0,10);
     });
 }
 
+let res = document.getElementById("autocompletion");
+
 function showAutocomplete(val) {
-    res = document.getElementById("autocompletion");
-    res.innerHTML = '';
-    let list = '';
+    res.innerHTML = ''
+
     autocompleteMatch(val).then((terms) => {
         for (i = 0; i < terms.length; i++) {
-            list += '<li class="autocompleteItem" onclick="appendSearchAutocomplete(this.id)" id="' + terms[i] + '">' + terms[i] + '</li>';
+            let li = document.createElement('li')
+            li.className = 'autocompleteItem'
+            li.addEventListener('click', (e) => appendSearchAutocomplete(e.target.id))
+            li.id = terms[i]
+            li.innerText = terms[i].charAt(0).toUpperCase() + terms[i].slice(1)
+            res.appendChild(li)
         }
-        res.innerHTML = '<ul>' + list + '</ul>';
+        if(terms.length > 0) res.style.display = 'initial'
+        else res.style.display = 'none'
     });
+
 }
 
 async function getPathoByKeywords() {
@@ -137,7 +145,7 @@ async function getPathoByKeywords() {
                     <p class="symptomes_title">Symptômes<span class="chevron down" onclick="showSymptomes(this)"></span></p>
                     <ul class="sympthomes_container">
                     `
-        var i = 0;
+        var i = 0
         patho.symptomes.forEach(sympt => {
             patho_html += `
                         <li>${sympt.desc}</li>
@@ -167,4 +175,9 @@ function appendSearchAutocomplete(suggestion) {
     keywordSearch.value = suggestion;
 }
 
-
+// document.querySelector('.form_input').addEventListener('focusout', (e) => {
+//     res.style.display = 'none'
+// })
+// document.querySelector('.form_input').addEventListener('focusin', (e) => {
+//     res.style.display = 'initial'
+// })

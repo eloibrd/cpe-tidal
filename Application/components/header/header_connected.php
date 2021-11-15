@@ -6,7 +6,7 @@
     <nav>
         <p>Bonjour <?php echo $_SESSION['username'] ?> </p>
         <a href="../../Auth/logout.php">
-            <button class="button">Déconnexion</button>
+            <button class="button">Deconnexion</button>
         </a>
     </nav>
 </header>
