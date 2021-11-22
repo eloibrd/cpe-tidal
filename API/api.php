@@ -4,6 +4,32 @@
 include 'DatabaseDriver.php';
 $dbd = new DatabaseDriver;
 
+
+function _authentificationError()
+{
+    // header('WWW-Authenticate: Basic realm="My Realm"');
+    header('HTTP/1.0 401 Unauthorized');
+    exit;
+}
+
+// if (!$_SESSION) {
+//     if (isset($_SERVER['PHP_AUTH_USER'])) {
+//         // the user is authenticated and handle the rest api call here
+//         $db_pass = $dbd->getUserPassword($_SERVER['PHP_AUTH_USER']);
+//         if (empty($db_pass)) {
+//             echo 'User not found';
+//             _authentificationError();
+//         } else if (!password_verify($_SERVER['PHP_AUTH_PW'], $db_pass[0]['password'])) {
+//             echo 'Wrong password for user ' . $_SERVER['PHP_AUTH_USER'];
+//             _authentificationError();
+//         }
+//     } else {
+//         echo 'Please authenticate';
+//         _authentificationError();
+//     }
+// }
+
+
 // get the HTTP method, path and body of the request
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'], '/'));
